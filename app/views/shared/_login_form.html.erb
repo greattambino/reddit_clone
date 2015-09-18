@@ -1,0 +1,10 @@
+<% action = (source == "login" ? session_url : users_url) %>
+<form action= <%= action %> method="post">
+  <%= auth_token %>
+  Username:<input type="text" name="user[user_name]" value= "<%= @user.user_name %>">
+  <%  if source == "signup" %>
+    Email:<input type="text" name="user[email]" value="<%=@user.email%>">
+  <% end %>
+  Password: <input type="Password" name="user[password]" value="<%= @user.password %>">
+  <input type="submit">
+</form>
