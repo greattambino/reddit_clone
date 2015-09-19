@@ -12,15 +12,15 @@ class UsersController < ApplicationController
     if @user.save
       login_user!(@user)
       flash[:base] = ["User created!"]
-      redirect_to user_url(@user)
+      redirect_to subs_url
     else
       flash.now[:base] = @user.errors.full_messages
       render :new
     end
   end
 
-  def show
-    @user = User.find(params[:id])
-    render :show
-  end
+  # def show
+  #   @user = User.find(params[:id])
+  #   render :show
+  # end
 end

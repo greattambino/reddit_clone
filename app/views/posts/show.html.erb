@@ -1,0 +1,18 @@
+<h1><%= @post.title %></h1>
+<% @post.subs.each do |sub| %>
+  <%= link_to sub.title, sub_url(sub) %>
+<% end %>
+<br>
+<b><%= @post.author.user_name %></b>  |  <%= time_ago_in_words(@post.created_at) %> ago
+<br><br>
+URL: <%= @post.url %>
+
+<br><br>
+<%= @post.content %>
+<br><br>
+Comments go here!
+
+<br><br>
+<% if current_user.id == @post.user_id %>
+  <%= link_to "Edit Post", edit_post_url(@post) %>
+<% end %>

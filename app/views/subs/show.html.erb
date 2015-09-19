@@ -1,0 +1,12 @@
+<h1> <%= @sub.title %> </h1>
+
+<h2><%= @sub.description %></h2>
+moderator: <%= @sub.moderator.user_name %>
+
+<h3>Posts:</h3>
+<% @sub.posts.each do |post| %>
+  <%= link_to post.title, post_url(post) %><br>
+<!-- delete posts option if moderator -->
+<% end %>
+
+<br><%= link_to "New Post", new_post_url %>

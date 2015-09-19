@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if @user
       login_user!(@user)
       flash[:base] = ["Welcome back #{@user.user_name}!"]
-      redirect_to user_url(@user)
+      redirect_to subs_url
     else
       @user = User.new(user_params)
       flash.now[:base] = ["Invalid username or password"]
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 
   def destroy
     @user = current_user
-    @user.reset_session_token
+    @user.reset_session_token!
     session[:session_token] = nil
     flash.now[:base] = ["Logged out #{@user.user_name}"]
     render :new

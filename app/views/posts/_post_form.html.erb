@@ -1,0 +1,22 @@
+<% action = (source == "new" ? posts_url : post_url(@post) ) %>
+
+<form action= <%= action %> method="post">
+  <%= auth_token %>
+  <% if source == "edit" %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+  Title: <input type="text" name="post[title]" value="<%= @post.title %>">
+  <br>
+  URL: <input type="text" name="post[url]" value="<%= @post.url %>">
+  <br>
+  <% @subs.each do |sub| %>
+  <!-- conditionally add checked if this post is in sub -->
+  <% checked = (@post.subs.include?(sub) ? "checked" : nil) %>
+  <input type="checkbox" name="post[sub_ids][]" <%= checked %> value=<%= sub.id %>> <%= sub.title %>
+  <% end %>
+  <br>
+  Content:
+<br><textarea name="post[content]" rows="8" cols="80"><%=@post.content %></textarea>
+  <br>
+  <input type="submit" value= <%= source == "new" ? "Create" : "Save" %>>
+</form>

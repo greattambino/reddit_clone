@@ -1,0 +1,18 @@
+<% action = (source == "new" ? subs_url : sub_url(@sub)) %>
+
+<form action= <%= action %> method="post">
+  <%= auth_token %>
+  <% if source == "edit" %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+  Title: <input type="text" name="sub[title]" value= <%= @sub.title %>>
+  <br>
+  Description: <br>
+  <textarea name="sub[description]"
+            rows="8"
+            cols="40">
+  <%= @sub.description %>
+</textarea>
+<br>
+<input type="submit" value= <%= source == "new" ? "Create" : "Save" %>>
+</form>
