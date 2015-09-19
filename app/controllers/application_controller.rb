@@ -14,6 +14,24 @@ class ApplicationController < ActionController::Base
     session[:session_token] = user.session_token
   end
 
+  def require_login
+    unless current_user
+      flash[:base] = ["You must be logged in to view that"]
+      redirect_to new_session_url
+    end
+  end
+
+  def require_moderator
+    unless current_user.id == Sub.find(params[:id]).user_id
+      flash[:base] = ["Only the moderator can edit that"]
+      redirect_to subs_url
+    end
+  end
+
+  def require_post_owner
+    
+  end
+
   private
   def user_params
     params.require(:user).permit(:user_name, :email, :password)

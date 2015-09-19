@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :require_login, except: :show
+  before_action :require_post_owner
   def new
     @subs = Sub.all
     @post = Post.new
